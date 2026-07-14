@@ -1,18 +1,19 @@
 # x-toolkit
 
-Toolkit growth & monetisasi X (Twitter) untuk creator Indonesia.
+Free & open source X (Twitter) growth toolkit.
 
-## 🤭 Fitur
+## Features
 
-- 🔥 Shadowban Hub — Fast & deep scan, 4-layer audit
-- 🛣️ Tools Hub — 30+ tools: diagnose, grow, create, recover
- - 💰 Recover Suite — Monetization appeal & cleanup guide
-- 👥 Mutual Universe — Followback audit & mutual directory
-- 🤙 AI Agent 3.0 — Smart reply, draft tweet, algo hacks
-- 🌎 Dashboard — Weekly analytics & engagement charts
-- ώ� Pricing — Free vs PRO (Rp 50K/3 bulan)
+- 🔥 **Shadowban Hub** — Fast & deep scan, 4-layer audit
+- 🛠️ **Tools Hub** — 30+ tools: diagnose, grow, create, recover
+- 💰 **Recover Suite** — Monetization appeal & cleanup guide
+- 👥 **Mutual Universe** — Followback audit & mutual directory
+- 🤖 **AI Agent 3.0** — Smart reply, draft tweet, algo hacks
+- 📊 **Dashboard** — Weekly analytics & engagement charts
 
-## 🦠 Tech Stack
+> **Completely free.** No paywalls, no PRO tiers.
+
+## Tech Stack
 
 - Vite + React 19
 - Tailwind CSS v4
@@ -20,17 +21,19 @@ Toolkit growth & monetisasi X (Twitter) untuk creator Indonesia.
 - Lucide Icons
 - Recharts
 
-## 🚀 Getting StartedJ
+## Getting Started
+
 ```bash
 npm install
 npm run dev
 ```
 
-## 🚀 Deploy
+## Deploy
 
 Deploy to Vercel with one-click:
-[Deploy to Vercel](https://vercel.com/new)
 
-## 💰 License
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
 
-PRO features coming soon. Built with ❤ for creator Indonesia.
+## License
+
+MIT — free and open source. Built with ❤️ for creators everywhere.
