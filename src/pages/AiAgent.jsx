@@ -13,7 +13,7 @@ const MODEL = 'auto'
 const modes = [
   { id: 'reply', label: 'Smart Reply', icon: MessageCircle, desc: 'Generate engaging & natural tweet replies' },
   { id: 'draft', label: 'Draft Tweet', icon: PenLine, desc: 'Create algo-friendly tweets from scratch' },
-  { id: 'hooks', label: 'Algo Hacks', icon: Zap, desc: '4 hook variations for maximum engagement' },
+  { id: 'hooks', label: 'Emotional Hook', icon: Zap, desc: 'One powerful emotional hook for your tweet' },
 ]
 
 const toneOptions = ['Casual', 'Professional', 'Witty', 'Inspirational', 'Sarcastic', 'Educational']
@@ -38,7 +38,7 @@ const getSystemPrompt = (mode, tone, lang) => {
   const modeInstruction = {
     reply: `You are an AI that writes smart, engaging replies to tweets. Given a tweet, craft a natural reply that adds value — agree, disagree respectfully, add insight, or ask a follow-up question. ${toneInstruction} ${langRules[lang]} Reply with ONLY the reply text, no quotes, no explanations. CRITICAL: MAX 280 CHARACTERS total — this is the X/Twitter limit. Write MAX 2-3 very short sentences. If it exceeds 280 chars, it will be cut off. Keep it extremely concise.`,
     draft: `You are an AI that drafts viral-worthy tweets. Given a topic, write a compelling tweet. ${toneInstruction} ${langRules[lang]} Use hooks, line breaks, and engaging structure. Make it algo-friendly: strong hook, valuable content, clear CTA. CRITICAL: MAX 280 CHARACTERS total — X/Twitter hard limit. Use short, punchy sentences with line breaks. Do NOT exceed 280 characters. Keep it tight and impactful. Reply with ONLY the tweet text, no quotes around it.`,
-    hooks: `You are an AI that generates 4 engaging tweet hooks/structures for a given topic. ${toneInstruction} ${langRules[lang]} Output exactly 4 versions separated by "---". Each version should have a label (V1, V2, V3, V4) with a style tag (Curiosity / Contrarian / Emotional / Educational / Story / Question), then the hook text. Make each one compelling and scroll-stopping. ALL 4 hooks combined MUST be UNDER 200 WORDS total. Each hook: 40-50 words max, one punchy sentence that fits in a single tweet. Keep it ultra-tight.`,
+    hooks: `You are an AI that generates ONE emotional tweet hook for a given topic. ${toneInstruction} ${langRules[lang]} Craft a single powerful, emotional hook that grabs attention. Use strong imagery, raw emotion, and a CTA. MUST be UNDER 200 words, fit in one X/Twitter post. Reply with ONLY the hook text.`,
   }[mode]
 
   return modeInstruction
@@ -76,7 +76,7 @@ export default function AiAgent() {
             { role: 'user', content: input.trim() }
           ],
           temperature: 0.7,
-          max_tokens: mode === 'hooks' ? 250 : 150,
+          max_tokens: mode === 'hooks' ? 200 : 150,
         }),
       })
 
@@ -168,7 +168,7 @@ export default function AiAgent() {
                 ? 'Tweet to reply to'
                 : mode === 'draft'
                 ? 'Topic / tweet idea'
-                : 'Topic for algo hooks'}
+                : 'Topic for emotional hook'}
             </label>
             <textarea
               value={input}
@@ -179,7 +179,7 @@ export default function AiAgent() {
                   ? 'Paste the tweet you want to reply to...'
                   : mode === 'draft'
                   ? 'What do you want to tweet about?'
-                  : 'What topic do you want hooks for?'
+                  : 'What topic for an emotional hook?'
               }
               rows={4}
               className="w-full bg-[#0a0a0a] border border-[#2a2a2a] rounded-lg p-4 text-sm text-white placeholder-[#555] focus:outline-none focus:border-[#1d9bf0] transition-colors resize-none"
@@ -218,7 +218,7 @@ export default function AiAgent() {
               ) : (
                 <>
                   <Sparkles size={16} />
-                  Generate {mode === 'reply' ? 'Reply' : mode === 'draft' ? 'Tweet' : 'Hooks'}
+                  Generate {mode === 'reply' ? 'Reply' : mode === 'draft' ? 'Tweet' : 'Hook'}
                 </>
               )}
             </button>
