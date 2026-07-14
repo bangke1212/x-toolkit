@@ -36,9 +36,9 @@ const getSystemPrompt = (mode, tone, lang) => {
   }[tone]
 
   const modeInstruction = {
-    reply: `You are an AI that writes smart, engaging replies to tweets. Given a tweet, craft a natural reply that adds value — agree, disagree respectfully, add insight, or ask a follow-up question. ${toneInstruction} ${langRules[lang]} Reply with ONLY the reply text, no quotes, no explanations. Keep it concise (1-3 sentences).`,
-    draft: `You are an AI that drafts viral-worthy tweets. Given a topic, write a compelling tweet. ${toneInstruction} ${langRules[lang]} Use hooks, line breaks, and engaging structure. Make it algo-friendly: strong hook, valuable content, clear CTA. Reply with ONLY the tweet text, no quotes around it.`,
-    hooks: `You are an AI that generates 4 engaging tweet hooks/structures for a given topic. ${toneInstruction} ${langRules[lang]} Output exactly 4 versions separated by "---". Each version should have a label (V1, V2, V3, V4) with a style tag (Curiosity / Contrarian / Emotional / Educational / Story / Question), then the hook text. Make each one compelling and scroll-stopping.`,
+    reply: `You are an AI that writes smart, engaging replies to tweets. Given a tweet, craft a natural reply that adds value — agree, disagree respectfully, add insight, or ask a follow-up question. ${toneInstruction} ${langRules[lang]} Reply with ONLY the reply text, no quotes, no explanations. Keep it under 200 words max — it must fit in one X/Twitter post. Be concise (1-3 sentences).`,
+    draft: `You are an AI that drafts viral-worthy tweets. Given a topic, write a compelling tweet. ${toneInstruction} ${langRules[lang]} Use hooks, line breaks, and engaging structure. Make it algo-friendly: strong hook, valuable content, clear CTA. CRITICAL: Keep it UNDER 200 words — it must fit in a single X/Twitter post (280 chars is the ideal length, 200 words max). Reply with ONLY the tweet text, no quotes around it.`,
+    hooks: `You are an AI that generates 4 engaging tweet hooks/structures for a given topic. ${toneInstruction} ${langRules[lang]} Output exactly 4 versions separated by "---". Each version should have a label (V1, V2, V3, V4) with a style tag (Curiosity / Contrarian / Emotional / Educational / Story / Question), then the hook text. Make each one compelling and scroll-stopping. Each hook MUST be under 40 words — short and punchy for X/Twitter format.`,
   }[mode]
 
   return modeInstruction
@@ -76,7 +76,7 @@ export default function AiAgent() {
             { role: 'user', content: input.trim() }
           ],
           temperature: 0.8,
-          max_tokens: mode === 'hooks' ? 800 : 400,
+          max_tokens: mode === 'hooks' ? 500 : 250,
         }),
       })
 
