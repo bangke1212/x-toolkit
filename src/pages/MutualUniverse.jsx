@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Users, UserCheck, UserX, UserPlus, Search, ArrowRights, TrendingUp } from 'lucide-react'
+import { Users, UserCheck, UserX, UserPlus, Search, ArrowRight, TrendingUp } from 'lucide-react'
 
 const mockData = {
   username: 'creator_id',
