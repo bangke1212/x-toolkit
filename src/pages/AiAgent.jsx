@@ -20,11 +20,11 @@ const toneOptions = ['Casual', 'Professional', 'Witty', 'Inspirational', 'Sarcas
 const langOptions = ['ID', 'EN', 'Mixed ID/EN']
 
 const getSystemPrompt = (mode, tone, lang) => {
-  const langInstruction = lang === 'ID'
-    ? 'Balas dalam Bahasa Indonesia yang natural dan gaul (bukan formal), seperti cara anak Twitter Indonesia ngomong.'
-    : lang === 'EN'
-    ? 'Reply in natural, conversational English. Sound like a real person on X/Twitter.'
-    : 'Reply in a mix of Indonesian and English, casual and natural like Indonesian Twitter users.'
+  const langRules = {
+    'ID': 'CRITICAL: You MUST reply entirely in Bahasa Indonesia. Use casual, natural Indonesian like how Indonesian Twitter users speak. NEVER use English. NEVER mix languages.',
+    'EN': 'CRITICAL: You MUST reply entirely in English. Use natural, conversational English like a native speaker on X/Twitter. NEVER use Indonesian. NEVER mix languages.',
+    'Mixed ID/EN': 'Reply in a mix of Indonesian and English, casual and natural like Indonesian Twitter users who code-switch.'
+  }
 
   const toneInstruction = {
     Casual: 'Keep it casual, friendly, and cool.',
@@ -36,9 +36,9 @@ const getSystemPrompt = (mode, tone, lang) => {
   }[tone]
 
   const modeInstruction = {
-    reply: `You are an AI that writes smart, engaging replies to tweets. Given a tweet, craft a natural reply that adds value — agree, disagree respectfully, add insight, or ask a follow-up question. ${toneInstruction} ${langInstruction} Reply with ONLY the reply text, no quotes, no explanations. Keep it concise (1-3 sentences).`,
-    draft: `You are an AI that drafts viral-worthy tweets. Given a topic, write a compelling tweet. ${toneInstruction} ${langInstruction} Use hooks, line breaks, and engaging structure. Make it algo-friendly: strong hook, valuable content, clear CTA. Reply with ONLY the tweet text, no quotes around it.`,
-    hooks: `You are an AI that generates 4 engaging tweet hooks/structures for a given topic. ${toneInstruction} ${langInstruction} Output exactly 4 versions separated by "---". Each version should have a label (V1, V2, V3, V4) with a style tag (Curiosity / Contrarian / Emotional / Educational / Story / Question), then the hook text. Make each one compelling and scroll-stopping.`,
+    reply: `You are an AI that writes smart, engaging replies to tweets. Given a tweet, craft a natural reply that adds value — agree, disagree respectfully, add insight, or ask a follow-up question. ${toneInstruction} ${langRules[lang]} Reply with ONLY the reply text, no quotes, no explanations. Keep it concise (1-3 sentences).`,
+    draft: `You are an AI that drafts viral-worthy tweets. Given a topic, write a compelling tweet. ${toneInstruction} ${langRules[lang]} Use hooks, line breaks, and engaging structure. Make it algo-friendly: strong hook, valuable content, clear CTA. Reply with ONLY the tweet text, no quotes around it.`,
+    hooks: `You are an AI that generates 4 engaging tweet hooks/structures for a given topic. ${toneInstruction} ${langRules[lang]} Output exactly 4 versions separated by "---". Each version should have a label (V1, V2, V3, V4) with a style tag (Curiosity / Contrarian / Emotional / Educational / Story / Question), then the hook text. Make each one compelling and scroll-stopping.`,
   }[mode]
 
   return modeInstruction
