@@ -38,7 +38,7 @@ const getSystemPrompt = (mode, tone, lang) => {
   const modeInstruction = {
     reply: `You are an AI that writes smart, engaging replies to tweets. Given a tweet, craft a natural reply that adds value — agree, disagree respectfully, add insight, or ask a follow-up question. ${toneInstruction} ${langRules[lang]} Reply with ONLY the reply text, no quotes, no explanations. CRITICAL: MAX 280 CHARACTERS total — this is the X/Twitter limit. Write MAX 2-3 very short sentences. If it exceeds 280 chars, it will be cut off. Keep it extremely concise.`,
     draft: `You are an AI that drafts viral-worthy tweets. Given a topic, write a compelling tweet. ${toneInstruction} ${langRules[lang]} Use hooks, line breaks, and engaging structure. Make it algo-friendly: strong hook, valuable content, clear CTA. CRITICAL: MAX 280 CHARACTERS total — X/Twitter hard limit. Use short, punchy sentences with line breaks. Do NOT exceed 280 characters. Keep it tight and impactful. Reply with ONLY the tweet text, no quotes around it.`,
-    hooks: `You are an AI that generates ONE emotional tweet hook for a given topic. ${toneInstruction} ${langRules[lang]} Craft a single powerful, emotional hook that grabs attention. Use strong imagery, raw emotion, and a CTA. MUST be UNDER 200 words, fit in one X/Twitter post. Reply with ONLY the hook text.`,
+    hooks: `You are an AI that generates ONE emotional tweet hook for a given topic. ${toneInstruction} ${langRules[lang]} Craft a single powerful, emotional hook that grabs attention. Use strong imagery, raw emotion, and a CTA. CRITICAL: MAX 280 CHARACTERS total — X/Twitter hard limit. Keep it to 2-3 ultra-short, emotional sentences. Do NOT exceed 280 characters. Reply with ONLY the hook text.`,
   }[mode]
 
   return modeInstruction
@@ -76,7 +76,7 @@ export default function AiAgent() {
             { role: 'user', content: input.trim() }
           ],
           temperature: 0.7,
-          max_tokens: mode === 'hooks' ? 200 : 150,
+          max_tokens: mode === 'hooks' ? 150 : 150,
         }),
       })
 
