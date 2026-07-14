@@ -7,6 +7,7 @@ import {
 } from 'lucide-react'
 
 const API_URL = 'https://api.hcnsec.cn/v1/chat/completions'
+const API_KEY = 'sk-6Tvn0yQbTDFfqbtgK4ldWIahdpIME5w87EEHGZQZFvEvdwmS'
 const MODEL = 'auto'
 
 const modes = [
@@ -26,7 +27,7 @@ const getSystemPrompt = (mode, tone, lang) => {
     : 'Reply in a mix of Indonesian and English, casual and natural like Indonesian Twitter users.'
 
   const toneInstruction = {
-    Casual: 'Keep it casual and friendly.',
+    Casual: 'Keep it casual, friendly, and cool.',
     Professional: 'Be professional but not stiff.',
     Witty: 'Make it witty, clever, and maybe a bit sarcastic.',
     Inspirational: 'Make it motivational and uplifting.',
@@ -64,7 +65,10 @@ export default function AiAgent() {
     try {
       const response = await fetch(API_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${API_KEY}`
+        },
         body: JSON.stringify({
           model: MODEL,
           messages: [
@@ -128,7 +132,7 @@ export default function AiAgent() {
           <div>
             <h1 className="text-2xl md:text-3xl font-bold">AI Agent 3.0</h1>
             <p className="text-sm text-[#71767b]">
-              Smart replies, tweet drafts & algo hacks — powered by LLM
+              Smart replies, tweet drafts & algo hacks — powered by free-tier hcnsec.cn LLM
             </p>
           </div>
         </div>
